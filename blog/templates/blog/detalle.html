@@ -1,12 +1,18 @@
 {% extends 'blog/base.html' %}
 
 {% block content %}
+<h1>{{ posts.titulo }}</h1>
+<p>{{ posts.texto|linebreaksbr }}</p>
+      {% if posts.fecha_publicacion %}
       <div class="date">
-        {% if posts.fecha_publicacion %}
-               {{ posts.fecha_publicacion }}
+        {{ posts.fecha_publicacion }}
+      </div>
+      {% else %}
+      <a class="btn btn-default" href="{% url 'post_publish' pk=posts.pk %}">Publicar</a>
       {% endif %}
+
       <a class="btn btn-default" href="{% url 'post_edit' pk=posts.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
       </div>
-      <h1>{{ posts.titulo }}</h1>
-      <p>{{ posts.texto|linebreaksbr }}</p>
+      <a class="btn btn-default" href="{% url 'post_remove' pk=posts.pk %}"><span class="glyphicon glyphicon-remove"></span></a>
+
   {% endblock %}
