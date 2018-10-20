@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from .models import Publicacion
 from .formulario import PostForm
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -12,6 +13,8 @@ def listado(request):
 def detallepost(request, pk):
      posts = get_object_or_404(Publicacion, pk=pk)
      return render(request, 'blog/detalle.html', {'posts': posts})
+
+@login_required
 
 def post_publish(request, pk):
     post = get_object_or_404(Publicacion, pk=pk)
