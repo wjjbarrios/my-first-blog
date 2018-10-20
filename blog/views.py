@@ -5,7 +5,7 @@ from .formulario import PostForm
 from django.contrib.auth.decorators import login_required
 
 
-
+@login_required
 def listado(request):
     posts = Publicacion.objects.filter(fecha_publicacion__lte=timezone.now()).order_by('fecha_publicacion')
     return render(request, 'blog/listar.html', {'posts': posts})
@@ -14,7 +14,6 @@ def detallepost(request, pk):
      posts = get_object_or_404(Publicacion, pk=pk)
      return render(request, 'blog/detalle.html', {'posts': posts})
 
-@login_required
 
 def post_publish(request, pk):
     post = get_object_or_404(Publicacion, pk=pk)
